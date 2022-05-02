@@ -43,4 +43,5 @@ class Unit(models.Model):
     living_area_sf = models.IntegerField()
     unit_number = models.IntegerField(null=True)
     unit_at_floor =  models.IntegerField(null=True)
+    price_per_month =  models.IntegerField()
 

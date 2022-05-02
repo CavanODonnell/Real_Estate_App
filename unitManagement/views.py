@@ -26,6 +26,7 @@ def unitJson(unit):
                 "living_area_sf" 				 : unit.living_area_sf,
                 "unit_number" 				     : unit.unit_number,
                 "unit_at_floor" 				 : unit.unit_at_floor,
+                "price_per_month"                : unit.price_per_month,
                 }
             }
     if unit.community_id and unit.community_id.address_id:
@@ -323,6 +324,7 @@ class Post_Unit_View(APIView):
             "living_area_sf" : fullData["living_area_sf"],
             "unit_number" : fullData["unit_number"],
             "unit_at_floor" : fullData["unit_at_floor"],
+            "price_per_month" : fullData["price_per_month"],
         }
         unitSerialier = Unit_Serializer(data=unitData)
         if unitSerialier.is_valid():

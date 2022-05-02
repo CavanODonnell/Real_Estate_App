@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     "leaseManagement.apps.LeasemanagementConfig",
     #3rd parties app
     "rest_framework",
-    'corsheaders',
+        "corsheaders",
+
 ]
 
 MIDDLEWARE = [
