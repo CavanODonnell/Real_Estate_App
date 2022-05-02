@@ -69,6 +69,7 @@ class Migration(migrations.Migration):
                 ('living_area_sf', models.IntegerField()),
                 ('unit_number', models.IntegerField(null=True)),
                 ('unit_at_floor', models.IntegerField(null=True)),
+                ('price_per_month', models.IntegerField()),
                 ('address_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='unitManagement.address')),
                 ('community_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='unitManagement.community')),
                 ('leasing_info_id', models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='unitManagement.leasing_info')),

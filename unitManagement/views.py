@@ -25,7 +25,7 @@ def unitJson(unit):
                 "unit_description" 			     : unit.unit_description,
                 "living_area_sf" 				 : unit.living_area_sf,
                 "unit_number" 				     : unit.unit_number,
-                "unit_at_floor" 				 : unit.unit_at_floor
+                "unit_at_floor" 				 : unit.unit_at_floor,
                 }
             }
     if unit.community_id and unit.community_id.address_id:
@@ -62,9 +62,16 @@ def unitJson(unit):
         finalJson['unit']['zip'] = 	unit.address_id.zip
     return finalJson
 
-
-
 class Unit_View(APIView):
+
+    def delete(self, request, id, format=None):
+        if Unit.objects.filter(id=id).exists():
+            unit = Unit.objects.get(id=id)
+            unit.delete();
+            return Response("Unit Deleted", status=status.HTTP_200_OK)
+        else:
+            return Response("Unit Not Found", status=status.HTTP_404_NOT_FOUND)
+
     def get(self, request, id):
         # checks if unit exists
         if Unit.objects.filter(id=id).exists():
@@ -305,11 +312,6 @@ class Post_Unit_View(APIView):
                 unitTypeObject = unitTypeSerializer.save()
         
         unitData = {
-            "unit_type_id" : unitTypeObject.id,
-            "community_id" : communityObject.id,
-            "address_id" : addressObject.id,
-            "leasing_info_id" : leasingObject.id,
-
             "num_of_bedrooms" : fullData["num_of_bedrooms"],
             "num_of_bathrooms" : fullData["num_of_bathrooms"],
             "num_of_balcony" :  fullData["num_of_balcony"],
@@ -331,6 +333,7 @@ class Post_Unit_View(APIView):
             return Response(unitSerialier.errors, status=status.HTTP_400_BAD_REQUEST)
 
         return Response("hello there from unit")
+
 
 class Example(APIView):
     def get(self, request):
